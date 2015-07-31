@@ -19,7 +19,7 @@ import elemental.json.impl.JreJsonFactory;
  * Use AngularJS with Vaadin - lightweight take which does not need a Widgetset 
  * - but does not offer additional functionality from {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}  
  */
-@JavaScript({ "angular.js", "angular-sanitize.js", "NgTemplate.js" })
+@JavaScript("NgTemplate.js")
 public abstract class NgTemplate extends AbstractJavaScriptComponent
 {
 

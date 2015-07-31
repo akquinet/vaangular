@@ -6,13 +6,14 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.server.VariableOwner;
 
-import de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus;
+import de.akquinet.engineering.vaadin.javascriptplus.AbstractJavaScriptPlusComponent;
 import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonFactory;
@@ -22,8 +23,8 @@ import elemental.json.impl.JreJsonFactory;
  * - offers additional functionality from {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}  
  */
 @SuppressWarnings("deprecation")
-@JavaScript({ "angular.js", "angular-sanitize.js", "NgTemplate.js" })
-public abstract class NgTemplatePlus extends AbstractJavaScriptComponentPlus implements VariableOwner
+@JavaScript("NgTemplate.js")
+public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent implements VariableOwner
 {
 
 	private static final long serialVersionUID = 1L;
@@ -114,10 +115,16 @@ public abstract class NgTemplatePlus extends AbstractJavaScriptComponentPlus imp
 		getState().changeType = "userState";
 		getState().userState = this.userState.toJson();
 	}
+	
+	private Map<String, Object> variables = new HashMap<String, Object>();
+
+	public Map<String, Object> getVariables() {
+		return variables;
+	}
 
 	@Override
-	public void changeVariables(Object source, Map<String, Object> variables) {
-		// per se nichts
+	protected void onChangeVariables(Object source, Map<String, Object> variables) {
+		this.variables.putAll(variables);
 	}
 	
 }

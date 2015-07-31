@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <parent>
-        <groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
-        <artifactId>vaangular-parent</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
+		<artifactId>vaangular-parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
-    <artifactId>vaangular-demo</artifactId>
+	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
+	<artifactId>vaangular-demo</artifactId>
+	
+	<properties>
+		<spring-boot.version>1.2.1.RELEASE</spring-boot.version>
+	</properties>
 
-    <dependencies>
-
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-server</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>de.akquinet.engineering</groupId>
-            <artifactId>vaadin-javascript-plus</artifactId>
-        </dependency>
-        
-    </dependencies>
+	<dependencies>
+		<dependency>
+			<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
+			<artifactId>vaangular</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+	</dependencies>
 
 </project>
