@@ -5,15 +5,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.json.client.JSONNumber;
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.event.ConnectorEventListener;
 
 import de.akquinet.engineering.vaadin.vaangular.angular.NgTemplatePlus;
 import de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod;
-import elemental.json.Json;
 
-@JavaScript({ "angular.js", "angular-sanitize.js", "wetter.js" })
+@JavaScript({ "META-INF/resources/webjars/angularjs/1.3.15/angular.js", "META-INF/resources/webjars/angularjs/1.3.15/angular-sanitize.js", "wetter.js" })
 public class Wetter extends NgTemplatePlus {
 
 	/**
