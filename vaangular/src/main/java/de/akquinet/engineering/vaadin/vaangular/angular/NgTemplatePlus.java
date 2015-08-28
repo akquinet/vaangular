@@ -123,7 +123,7 @@ public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent imp
 	}
 
 	@Override
-	protected void onChangeVariables(Object source, Map<String, Object> variables) {
+	protected void onChangeVariables(Map<String, Object> variables) {
 		this.variables.putAll(variables);
 	}
 	

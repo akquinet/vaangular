@@ -32,6 +32,7 @@
 		<dependency>
 			<groupId>de.akquinet.engineering</groupId>
 			<artifactId>javascriptplus-for-vaadin</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 	</dependencies>
