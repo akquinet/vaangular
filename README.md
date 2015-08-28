@@ -83,7 +83,6 @@ Obviously, our file also needs a controller which mainly needs to do two things:
 ```javascript
 angular.module('wetterModule', ['ngSanitize'])
 .controller('WetterController', function($scope, $connector, $sce) {
-	// $scope.userState bekommen wir
 	$scope.sliderPos = 0;
 	$scope.content = function() {
 		var res = $scope.userState.entries[$scope.sliderPos];
