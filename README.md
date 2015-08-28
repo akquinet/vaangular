@@ -101,6 +101,10 @@ angular.module('wetterModule', ['ngSanitize'])
 });
 ```
 
+There is also a Jasmine test in place for that - you can open */vaangular-demo/src/test/resources/de/akquinet/engineering/vaadin/vaangular/demo/wettertest/wetterTest.html* in a browser to view it (be sure to run `mvn package` once before so all resources are available). A successful run then looks like this:
+
+<img src="img/jasmine.png" alt="Four green test suites in Jasmine" />
+
 Nothing so far is mysterious - except that we use `$scope.userState` that seemingly comes out of nowhere. In fact, it is all the data vaadin ships to us - at our fingertips. How you fill the user state is actually explained right below:
 
 ### Providing a counterpart in vaadin (extending NgTemplate or NgTemplatePlus)
