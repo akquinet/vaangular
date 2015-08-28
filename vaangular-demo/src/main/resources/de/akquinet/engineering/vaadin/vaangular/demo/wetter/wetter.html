@@ -1,8 +1,8 @@
 <div ng-controller="WetterController">
 	<div ng-bind-html="content()"></div>
-	<input style="width: 508px; margin-left: 18px;" type="range" min="0" max="{{userState.zeiten.length-1}}" step="1" ng-model="sliderPos" ng-change="sliderUpdated()" />
+	<input style="width: 508px; margin-left: 18px;" type="range" min="0" max="{{userState.times.length-1}}" step="1" ng-model="sliderPos" ng-change="sliderUpdated()" />
 	<div style="margin-left: 20px; ">
-		<div style="display: inline-block; width: {{500/(userState.zeiten.length-1)}}px;" ng-repeat="zeit in userState.zeiten" ng-click="moveSlider($index)">
+		<div style="display: inline-block; width: {{500/(userState.times.length-1)}}px;" ng-repeat="zeit in userState.times" ng-click="moveSlider($index)">
 			<div style="display: inline-block; margin-left: -50px; width: 50px; text-align: right; ">{{zeit}}</div>:00
 		</div>
 	</div>

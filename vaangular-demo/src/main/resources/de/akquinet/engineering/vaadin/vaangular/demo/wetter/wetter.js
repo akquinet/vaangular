@@ -3,7 +3,7 @@ angular.module('wetterModule', ['ngSanitize'])
 	// $scope.userState bekommen wir
 	$scope.sliderPos = 0;
 	$scope.content = function() {
-		var res = $scope.userState.eintraege[$scope.sliderPos];
+		var res = $scope.userState.entries[$scope.sliderPos];
 		return $sce.trustAsHtml(res);
 	};
 	$scope.moveSlider = function(val) {

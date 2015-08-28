@@ -12,6 +12,14 @@
 
 	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 	<artifactId>vaangular</artifactId>
+	
+	<properties>
+		<implementation.version>${project.version}</implementation.version>
+		<implementation.title>vaangular</implementation.title>
+		<implementation.vendor>akquinet engineering GmbH</implementation.vendor>
+		<vaadin.license.title>Apache License Version 2.0</vaadin.license.title>
+		<vaadin.addon>${project.artifactId}-${project.version}.jar</vaadin.addon>
+	</properties>
 
 	<dependencies>
 
@@ -42,5 +50,51 @@
 		</dependency>
 
 	</dependencies>
+	
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<!-- Package format version - do not change -->
+							<Vaadin-Package-Version>1</Vaadin-Package-Version>
+							<Implementation-Title>${implementation.title}</Implementation-Title>
+							<Vaadin-License-Title>${vaadin.license.title}</Vaadin-License-Title>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.5.3</version>
+				<configuration>
+					<finalName>${project.artifactId}</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+					<descriptors>
+						<descriptor>assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

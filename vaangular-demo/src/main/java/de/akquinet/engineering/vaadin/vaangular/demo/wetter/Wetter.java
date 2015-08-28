@@ -11,7 +11,9 @@ import com.vaadin.event.ConnectorEventListener;
 import de.akquinet.engineering.vaadin.vaangular.angular.NgTemplatePlus;
 import de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod;
 
-@JavaScript({ "META-INF/resources/webjars/angularjs/1.3.15/angular.js", "META-INF/resources/webjars/angularjs/1.3.15/angular-sanitize.js", "wetter.js" })
+@JavaScript({ "META-INF/resources/webjars/angularjs/1.3.15/angular.js",
+		"META-INF/resources/webjars/angularjs/1.3.15/angular-sanitize.js",
+		"wetter.js" })
 public class Wetter extends NgTemplatePlus {
 
 	/**
@@ -21,18 +23,19 @@ public class Wetter extends NgTemplatePlus {
 
 	private List<WetterClickListener> listeners = new ArrayList<Wetter.WetterClickListener>();
 
-	private int[] zeiten;
-	private String[] eintraege;
+	private int[] times;
+	private String[] entries;
 
 	public Wetter() throws IOException, URISyntaxException {
 		super(Wetter.class.getPackage(), "wetterModule");
 		addService("button", new Object() {
 			@ServiceMethod
 			public void click() {
-				System.out.println(getVariables().get("sliderPos").getClass());
-				int index = Integer.parseInt(getVariables().get("sliderPos").toString());
+				int index = getSliderPos();
+				System.out
+						.println("Button from w/in angular - value: " + index);
 				for (WetterClickListener listener : listeners) {
-					listener.click(zeiten[index], eintraege[index]);
+					listener.click(times[index], entries[index]);
 				}
 			}
 		});
@@ -43,38 +46,41 @@ public class Wetter extends NgTemplatePlus {
 		setUserState("buttonCaption", caption);
 	}
 
-	public void setDaten(int[] zeiten, String[] eintraege) {
-		validateParameters(zeiten, eintraege);
-		this.zeiten = zeiten;
-		this.eintraege = eintraege;
-		setUserState("zeiten", zeiten);
-		setUserState("eintraege", eintraege);
+	public int getSliderPos() {
+		return Integer.parseInt(getVariables().get("sliderPos").toString());
+	}
+
+	public void setDaten(int[] times, String[] entries) {
+		validateParameters(times, entries);
+		this.times = times;
+		this.entries = entries;
+		setUserState("times", times);
+		setUserState("entries", entries);
 		markAsDirty();
 	}
 
-	static void validateParameters(int[] zeiten, String[] eintraege) {
-		if (zeiten.length != eintraege.length) {
+	static void validateParameters(int[] times, String[] entries) {
+		if (times.length != entries.length) {
+			throw new IllegalArgumentException("#times does not match #entries");
+		}
+		if (times.length < 2) {
 			throw new IllegalArgumentException(
-					"Nicht so viele Zeiten wie Einträge");
+					"#times/#entries needs to be >=2");
 		}
-		if (zeiten.length < 2) {
-			throw new IllegalArgumentException("Mindestens zwei Zeiten nötig");
-		}
-		int step = calcStep(zeiten);
-		for (int i = 1; i < zeiten.length; i++) {
-			if (!(zeiten[i - 1] < zeiten[i])) {
-				throw new IllegalArgumentException(
-						"Zeiten müssen aufeinander aufbauen");
+		int step = calcStep(times);
+		for (int i = 1; i < times.length; i++) {
+			if (!(times[i - 1] < times[i])) {
+				throw new IllegalArgumentException("Times must be in order");
 			}
-			if ((zeiten[i] - zeiten[i - 1]) != step) {
+			if ((times[i] - times[i - 1]) != step) {
 				throw new IllegalArgumentException(
-						"Zeiten müssen äquidistant sein");
+						"Times must have same delta between one another");
 			}
 		}
 	}
 
-	private static int calcStep(int[] zeiten) {
-		int step = zeiten[1] - zeiten[0];
+	private static int calcStep(int[] times) {
+		int step = times[1] - times[0];
 		return step;
 	}
 
@@ -88,7 +94,7 @@ public class Wetter extends NgTemplatePlus {
 
 	public interface WetterClickListener extends ConnectorEventListener {
 
-		public void click(int zeit, String eintrag);
+		public void click(int time, String entry);
 	}
 
 }
