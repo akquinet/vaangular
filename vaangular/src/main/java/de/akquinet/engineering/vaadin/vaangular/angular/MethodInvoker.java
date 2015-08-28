@@ -4,6 +4,7 @@
 package de.akquinet.engineering.vaadin.vaangular.angular;
 
 import com.vaadin.ui.JavaScriptFunction;
+
 import elemental.json.JsonArray;
 
 import java.lang.reflect.InvocationTargetException;
@@ -53,17 +54,17 @@ public class MethodInvoker implements JavaScriptFunction
                     paramList.add(arguments.get(i));
                 }
             }
-
             method.setAccessible(true);
             method.invoke(object, paramList.toArray());
         }
         catch (IllegalAccessException e)
         {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         catch (InvocationTargetException e)
         {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
+    
 }
