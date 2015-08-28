@@ -4,7 +4,17 @@ vaangular
 Provide stellar integration of AngularJS with vaadin
 
 ## What is vaangular?
-vaangular combines the power of [vaadin](https://vaadin.com) and Java with the power of [AngularJS](https://angularjs.org) to create awesome UIs. Effectively, you create three things: 
+vaangular combines the power of [vaadin](https://vaadin.com) and Java with the power of [AngularJS](https://angularjs.org) to create awesome UIs. 
+
+Some reasons why you might want to do that: 
+- mix and match skill within your team
+- increase responsiveness (by doing client-side logic)
+- re-use existing AngularJS-based assets
+- have an alternative to custom GWT development
+
+## How dows it work? (examples, please!)
+
+Effectively, you create three things: 
 1. an HTML fragment with AngularJS attributes and directives in it
 2. an AngularJS controller (along with tests in e.g. Jasmine)
 3. a vaadin component to hook up the previous two with the backend
@@ -13,7 +23,13 @@ vaangular makes extensive use `com.vaadin.ui.AbstractJavaScriptComponent` and ad
 
 A comprehensive demo is included that shows the full roundtrip (see the `vaangular-demo` folder for all the code - you can fire off this example by running `de.akquinet.engineering.vaadin.vaangular.demo.VaangularApplication.main` which invokes Spring Boot, pulls up a server and offers you an endpoint at `localhost:8090`)
 
-We'll use this as an example throughout the page... (it's best viewed in Webkit = Chrome / Safari btw)
+We'll use this as an example throughout the page... (it's best viewed in Webkit = Chrome / Safari btw.)
+
+Here's what the example looks like: 
+
+<img src="img/demo.png" alt="Screenshot of the weather application as explained in 'en detail' below" />
+
+En detail: the current weather (1) is displayed depending on the slider position (2) - this happens without server roundtrips (pure AngularJS). When clicking a 100%-vaadin-like AngularJS-button (3) or a standard-vaadin-button (4), you get a popup window (5) - this happens in vaadin (so there is a seamless integration between those two).
 
 ## Creating a component
 
@@ -113,7 +129,7 @@ public void setDaten(int[] times, String[] entries) {
 }
 ```
 
-`setUserState` is provided by NgTemplate / NgTemplatePlus: adding `xyz` to it results in `$scope.userState.xyz` on the client - so `times` results in `$scope.userState.times`. Please observe that changes to this state on the client are not replicated back and overwritten without notice (the standard vaadin behavior). In order go get info from the client to the server, you can either use a method invocation or (provided you use NgTemplatePlus) a deferred variable change. So far, for providing infos to the client, `setUserState`is perfectly OK.
+`setUserState` is provided by NgTemplate / NgTemplatePlus: adding `xyz` to it results in `$scope.userState.xyz` on the client - so `times` results in `$scope.userState.times`. Please observe that changes to this state on the client are not replicated back and overwritten without notice (the standard vaadin behavior). In order to get info from the client to the server, you can either use a method invocation or (provided you use NgTemplatePlus) a deferred variable change. So far, for providing infos to the client, `setUserState`is perfectly OK.
 
 To work with the slider position (`sliderPos`), we use 	
 
@@ -169,6 +185,8 @@ addService("button", new Object() {
 	}
 });
 ```
+
+We register such a listener to again display the pop-up.
 
 So: any class can provide methods to the AngularJS-side as long as there methods are *public* and annotated with `@ServiceMethod` (in fact: `de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod`). Clicking the button now results in the Java method being called (again with deferred variable changes processed before that).
 
