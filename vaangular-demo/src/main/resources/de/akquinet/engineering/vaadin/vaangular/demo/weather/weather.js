@@ -13,8 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-angular.module('wetterModule', ['ngSanitize'])
-.controller('WetterController', function($scope, $connector, $sce) {
+angular.module('weatherModule', ['ngSanitize'])
+.controller('WeatherController', function($scope, $connector, $sce) {
 	$scope.sliderPos = 0;
 	$scope.content = function() {
 		var res = $scope.userState.entries[$scope.sliderPos];

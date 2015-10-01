@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package de.akquinet.engineering.vaadin.vaangular.demo.wetter;
+package de.akquinet.engineering.vaadin.vaangular.demo.weather;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -28,28 +28,28 @@ import de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod;
 
 @JavaScript({ "META-INF/resources/webjars/angularjs/1.3.15/angular.js",
 		"META-INF/resources/webjars/angularjs/1.3.15/angular-sanitize.js",
-		"wetter.js" })
-public class Wetter extends NgTemplatePlus {
+		"weather.js" })
+public class Weather extends NgTemplatePlus {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1857536974366619130L;
 
-	private List<WetterClickListener> listeners = new ArrayList<Wetter.WetterClickListener>();
+	private List<WeatherClickListener> listeners = new ArrayList<Weather.WeatherClickListener>();
 
 	private int[] times;
 	private String[] entries;
 
-	public Wetter() throws IOException, URISyntaxException {
-		super(Wetter.class.getPackage(), "wetterModule");
+	public Weather() throws IOException, URISyntaxException {
+		super(Weather.class.getPackage(), "weatherModule");
 		addService("button", new Object() {
 			@ServiceMethod
 			public void click() {
 				int index = getSliderPos();
 				System.out
 						.println("Button from w/in angular - value: " + index);
-				for (WetterClickListener listener : listeners) {
+				for (WeatherClickListener listener : listeners) {
 					listener.click(times[index], entries[index]);
 				}
 			}
@@ -99,15 +99,15 @@ public class Wetter extends NgTemplatePlus {
 		return step;
 	}
 
-	public void addClickListener(WetterClickListener listener) {
+	public void addClickListener(WeatherClickListener listener) {
 		listeners.add(listener);
 	}
 
-	public void removeClickListener(WetterClickListener listener) {
+	public void removeClickListener(WeatherClickListener listener) {
 		listeners.remove(listener);
 	}
 
-	public interface WetterClickListener extends ConnectorEventListener {
+	public interface WeatherClickListener extends ConnectorEventListener {
 
 		public void click(int time, String entry);
 	}

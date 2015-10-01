@@ -13,9 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-describe("Wetter base suite", function() {
+describe("Weather base suite", function() {
 	var $rootScope, $connector, $sce, createController;
-	beforeEach(module("wetterModule"));
+	beforeEach(module("weatherModule"));
 	beforeEach(inject(function($injector) {
 		$rootScope = $injector.get('$rootScope');
 		$rootScope.userState={};
@@ -32,7 +32,7 @@ describe("Wetter base suite", function() {
 		};
 		var $controller = $injector.get('$controller');
 		createController = function() {
-			return $controller('WetterController', {
+			return $controller('WeatherController', {
 				'$scope' : $rootScope,
 				'$connector' : $connector,
 				'$sce' : $sce

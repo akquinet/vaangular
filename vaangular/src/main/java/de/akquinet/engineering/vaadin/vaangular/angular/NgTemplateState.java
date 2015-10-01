@@ -25,5 +25,5 @@ public class NgTemplateState extends JavaScriptComponentState {
 	public String moduleName;
 	public String templateSource;
 	public String userState;
-	
+
 }

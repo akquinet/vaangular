@@ -34,41 +34,42 @@ import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonFactory;
 
 /**
- * Use AngularJS with Vaadin - full-fledged take which DOES need a Widgetset 
- * - offers additional functionality from {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}  
+ * Use AngularJS with Vaadin - full-fledged take which DOES need a Widgetset -
+ * offers additional functionality from
+ * {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}
  */
 @SuppressWarnings("deprecation")
 @JavaScript("NgTemplate.js")
-public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent implements VariableOwner
-{
+public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent
+		implements VariableOwner {
 
 	private static final long serialVersionUID = 1L;
 
 	private JsonObject userState;
 
-    public NgTemplatePlus(String templateSource, String moduleName) {
-    	userState = new JreJsonFactory().createObject();
-    	
+	public NgTemplatePlus(String templateSource, String moduleName) {
+		userState = new JreJsonFactory().createObject();
+
 		getState().templateSource = templateSource;
-    	getState().moduleName = moduleName;
+		getState().moduleName = moduleName;
 	}
-    
+
 	public NgTemplatePlus(Package templatePackage, String moduleName)
 			throws URISyntaxException, UnsupportedEncodingException,
 			IOException {
 		userState = new JreJsonFactory().createObject();
 
-		File templateFolder = new File(NgTemplatePlus.class
-				.getClassLoader()
+		File templateFolder = new File(NgTemplatePlus.class.getClassLoader()
 				.getResource(templatePackage.getName().replace('.', '/'))
 				.getPath());
 
 		initFromFile(templateFolder, moduleName);
 	}
 
-	public NgTemplatePlus(File templateFolder, String moduleName) throws IOException {
+	public NgTemplatePlus(File templateFolder, String moduleName)
+			throws IOException {
 		userState = new JreJsonFactory().createObject();
-		
+
 		initFromFile(templateFolder, moduleName);
 	}
 
@@ -91,46 +92,42 @@ public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent imp
 				"UTF-8");
 
 		getState().templateSource = templateSource;
-    	getState().moduleName = moduleName;
+		getState().moduleName = moduleName;
 	}
 
 	@Override
-    public NgTemplateState getState()
-    {
+	public NgTemplateState getState() {
 		return (NgTemplateState) super.getState();
 	}
 
-    public void addService(final String name, final Object callback)
-    {
-        Class<?> type = callback.getClass();
-        for (final Method method : type.getMethods())
-        {
-            if (method.isAnnotationPresent(ServiceMethod.class))
-            {
-                final String methodName = method.getName();
-                addFunction(name + "_" + methodName, new MethodInvoker(callback, method));
-            }
-        }
-    }
+	public void addService(final String name, final Object callback) {
+		Class<?> type = callback.getClass();
+		for (final Method method : type.getMethods()) {
+			if (method.isAnnotationPresent(ServiceMethod.class)) {
+				final String methodName = method.getName();
+				addFunction(name + "_" + methodName, new MethodInvoker(
+						callback, method));
+			}
+		}
+	}
 
 	public void setUserState(String key, String value) {
 		this.userState.put(key, value);
 		pushUserStateChange();
 	}
-	
+
 	public void setUserState(String key, Object value) {
-		
+
 		String json = new Gson().toJson(value);
-		this.userState.put(key, (JsonValue)new JreJsonFactory().parse(json));
+		this.userState.put(key, (JsonValue) new JreJsonFactory().parse(json));
 		pushUserStateChange();
 	}
 
-	private void pushUserStateChange()
-	{
+	private void pushUserStateChange() {
 		getState().changeType = "userState";
 		getState().userState = this.userState.toJson();
 	}
-	
+
 	private Map<String, Object> variables = new HashMap<String, Object>();
 
 	public Map<String, Object> getVariables() {
@@ -141,5 +138,5 @@ public abstract class NgTemplatePlus extends AbstractJavaScriptPlusComponent imp
 	protected void onChangeVariables(Map<String, Object> variables) {
 		this.variables.putAll(variables);
 	}
-	
+
 }

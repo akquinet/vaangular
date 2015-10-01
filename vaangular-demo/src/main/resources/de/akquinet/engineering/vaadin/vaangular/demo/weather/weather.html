@@ -13,7 +13,7 @@
    License for the specific language governing permissions and limitations under
    the License. 
 -->
-<div ng-controller="WetterController">
+<div ng-controller="WeatherController">
 	<div ng-bind-html="content()"></div>
 	<input style="width: 508px; margin-left: 18px;" type="range" min="0" max="{{userState.times.length-1}}" step="1" ng-model="sliderPos" ng-change="sliderUpdated()" />
 	<div style="margin-left: 20px; ">

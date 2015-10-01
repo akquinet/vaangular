@@ -28,8 +28,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
-import de.akquinet.engineering.vaadin.vaangular.demo.wetter.Wetter;
-import de.akquinet.engineering.vaadin.vaangular.demo.wetter.Wetter.WetterClickListener;
+import de.akquinet.engineering.vaadin.vaangular.demo.weather.Weather;
+import de.akquinet.engineering.vaadin.vaangular.demo.weather.Weather.WeatherClickListener;
 
 @Theme("valo")
 @PreserveOnRefresh
@@ -37,7 +37,7 @@ public class VaangularUI extends UI {
 
 	private static final long serialVersionUID = 1L;
 
-	protected Wetter weatherInfo;
+	protected Weather weatherInfo;
 	protected Button javaSend;
 
 	/*
@@ -55,13 +55,13 @@ public class VaangularUI extends UI {
 			mainLayout.setSpacing(true);
 			Accordion accordion = new Accordion();
 
-			weatherInfo = new Wetter();
+			weatherInfo = new Weather();
 			final int[] times = new int[] { 10, 12, 14, 16 };
 			final String[] entries = new String[] {
 					"<strong>10°</strong> sunny", "<strong>12°</strong> windy",
 					"<strong>14°</strong> cold", "<strong>20°</strong> superb" };
 			weatherInfo.setDaten(times, entries);
-			weatherInfo.addClickListener(new WetterClickListener() {
+			weatherInfo.addClickListener(new WeatherClickListener() {
 
 				private static final long serialVersionUID = 1L;
 
@@ -71,7 +71,7 @@ public class VaangularUI extends UI {
 				}
 			});
 			weatherInfo.setButtonCaption("E-Mail (from angular)");
-			accordion.addTab(weatherInfo, "Wetter-Demo");
+			accordion.addTab(weatherInfo, "Weather-Demo");
 			mainLayout.addComponent(accordion);
 
 			javaSend = new Button();

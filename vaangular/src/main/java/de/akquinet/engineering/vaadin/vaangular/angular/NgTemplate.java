@@ -31,40 +31,40 @@ import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonFactory;
 
 /**
- * Use AngularJS with Vaadin - lightweight take which does not need a Widgetset 
- * - but does not offer additional functionality from {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}  
+ * Use AngularJS with Vaadin - lightweight take which does not need a Widgetset
+ * - but does not offer additional functionality from
+ * {@link de.akquinet.engineering.vaadinjavascriptplus.AbstractJavaScriptComponentPlus}
  */
 @JavaScript("NgTemplate.js")
-public abstract class NgTemplate extends AbstractJavaScriptComponent
-{
+public abstract class NgTemplate extends AbstractJavaScriptComponent {
 
 	private static final long serialVersionUID = 1L;
 
 	private JsonObject userState;
 
-    public NgTemplate(String templateSource, String moduleName) {
-    	userState = new JreJsonFactory().createObject();
-    	
+	public NgTemplate(String templateSource, String moduleName) {
+		userState = new JreJsonFactory().createObject();
+
 		getState().templateSource = templateSource;
-    	getState().moduleName = moduleName;
+		getState().moduleName = moduleName;
 	}
-    
+
 	public NgTemplate(Package templatePackage, String moduleName)
 			throws URISyntaxException, UnsupportedEncodingException,
 			IOException {
 		userState = new JreJsonFactory().createObject();
 
-		File templateFolder = new File(NgTemplate.class
-				.getClassLoader()
+		File templateFolder = new File(NgTemplate.class.getClassLoader()
 				.getResource(templatePackage.getName().replace('.', '/'))
 				.getPath());
 
 		initFromFile(templateFolder, moduleName);
 	}
 
-	public NgTemplate(File templateFolder, String moduleName) throws IOException {
+	public NgTemplate(File templateFolder, String moduleName)
+			throws IOException {
 		userState = new JreJsonFactory().createObject();
-		
+
 		initFromFile(templateFolder, moduleName);
 	}
 
@@ -87,42 +87,38 @@ public abstract class NgTemplate extends AbstractJavaScriptComponent
 				"UTF-8");
 
 		getState().templateSource = templateSource;
-    	getState().moduleName = moduleName;
+		getState().moduleName = moduleName;
 	}
 
 	@Override
-    public NgTemplateState getState()
-    {
+	public NgTemplateState getState() {
 		return (NgTemplateState) super.getState();
 	}
 
-    public void addService(final String name, final Object callback)
-    {
-        Class<?> type = callback.getClass();
-        for (final Method method : type.getMethods())
-        {
-            if (method.isAnnotationPresent(ServiceMethod.class))
-            {
-                final String methodName = method.getName();
-                addFunction(name + "_" + methodName, new MethodInvoker(callback, method));
-            }
-        }
-    }
+	public void addService(final String name, final Object callback) {
+		Class<?> type = callback.getClass();
+		for (final Method method : type.getMethods()) {
+			if (method.isAnnotationPresent(ServiceMethod.class)) {
+				final String methodName = method.getName();
+				addFunction(name + "_" + methodName, new MethodInvoker(
+						callback, method));
+			}
+		}
+	}
 
 	public void setUserState(String key, String value) {
 		this.userState.put(key, value);
 		pushUserStateChange();
 	}
-	
+
 	public void setUserState(String key, Object value) {
-		
+
 		String json = new Gson().toJson(value);
-		this.userState.put(key, (JsonValue)new JreJsonFactory().parse(json));
+		this.userState.put(key, (JsonValue) new JreJsonFactory().parse(json));
 		pushUserStateChange();
 	}
 
-	private void pushUserStateChange()
-	{
+	private void pushUserStateChange() {
 		getState().changeType = "userState";
 		getState().userState = this.userState.toJson();
 	}

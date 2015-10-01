@@ -41,15 +41,15 @@ Furthermore, you can utilize Spring Boot, Eclipse, etc. (what our example does)
 
 ### Creating the package
 
-Create a package (with identical names) in both src/main/java and src/main/resources - in our example: `de.akquinet.engineering.vaadin.vaangular.demo.wetter`
+Create a package (with identical names) in both src/main/java and src/main/resources - in our example: `de.akquinet.engineering.vaadin.vaangular.demo.weather`
 
 ### Creating the HTML fragment
 
-Create an HTML file with the same name as the last part of the package (here: 'wetter') ending with '.html'. The file can contain any markup as long as there is exactly one topmost tag.
+Create an HTML file with the same name as the last part of the package (here: 'weather') ending with '.html'. The file can contain any markup as long as there is exactly one topmost tag.
 
-So, your 'wetter.html' can initially look like this: 
+So, your 'weather.html' can initially look like this: 
 ```html
-<div ng-controller="WetterController">
+<div ng-controller="WeatherController">
 	<div ng-bind-html="content()"></div>
 	<input style="width: 508px; margin-left: 18px;" type="range" min="0" max="{{userState.times.length-1}}" step="1" ng-model="sliderPos" ng-change="sliderUpdated()" />
 	<div style="margin-left: 20px; ">
@@ -81,8 +81,8 @@ Obviously, our file also needs a controller which mainly needs to do two things:
 - invoke some action on button click (i.e. call logic implemented in vaadin)
 
 ```javascript
-angular.module('wetterModule', ['ngSanitize'])
-.controller('WetterController', function($scope, $connector, $sce) {
+angular.module('weatherModule', ['ngSanitize'])
+.controller('WeatherController', function($scope, $connector, $sce) {
 	$scope.sliderPos = 0;
 	$scope.content = function() {
 		var res = $scope.userState.entries[$scope.sliderPos];
@@ -101,7 +101,7 @@ angular.module('wetterModule', ['ngSanitize'])
 });
 ```
 
-There is also a Jasmine test in place for that - you can open */vaangular-demo/src/test/resources/de/akquinet/engineering/vaadin/vaangular/demo/wettertest/wetterTest.html* in a browser to view it (be sure to run `mvn package` once before so all resources are available). A successful run then looks like this:
+There is also a Jasmine test in place for that - you can open */vaangular-demo/src/test/resources/de/akquinet/engineering/vaadin/vaangular/demo/weathertest/weatherTest.html* in a browser to view it (be sure to run `mvn package` once before so all resources are available). A successful run then looks like this:
 
 <img src="img/jasmine.png" alt="Four green test suites in Jasmine" />
 
@@ -114,7 +114,7 @@ So what we're still missing from above example is
 - something to do with `sliderPos`
 - an implementation for `$connector.button_click()`
 
-In order to do that, there has to be a class `de.akquinet.engineering.vaadin.vaangular.demo.wetter.Wetter` extending `de.akquinet.engineering.vaadin.vaangular.angular.NgTemplate(Plus)`
+In order to do that, there has to be a class `de.akquinet.engineering.vaadin.vaangular.demo.weather.Weather` extending `de.akquinet.engineering.vaadin.vaangular.angular.NgTemplate(Plus)`
 
 When extending `NgTemplatePlus` (that comes with the [JavaScriptPlus for vaadin](https://github.com/akquinet/JavascriptPlusForvaadin) add-on), you can use deferred variable changes: No call to the server is made until some button click or other (non-deferred) action happens. This dramatically increases responsiveness while reducing (unnecessary) network roundtrips and bandwidth usage. Many standard vaadin components provide this exact behavior via `immediate=false`.
 
@@ -182,7 +182,7 @@ addService("button", new Object() {
 	public void click() {
 		int index = getSliderPos();
 		System.out.println("Button from w/in angular - value: " + index);
-		for (WetterClickListener listener : listeners) {
+		for (WeatherClickListener listener : listeners) {
 			listener.click(times[index], entries[index]);
 		}
 	}
