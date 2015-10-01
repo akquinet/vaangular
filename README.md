@@ -12,7 +12,7 @@ Some reasons why you might want to do that:
 - re-use existing AngularJS-based assets
 - have an alternative to custom GWT development
 
-## How dows it work? (examples, please!)
+## How does it work? (examples, please!)
 
 Effectively, you create three things: 
 1. an HTML fragment with AngularJS attributes and directives in it
@@ -191,7 +191,7 @@ addService("button", new Object() {
 
 We register such a listener to again display the pop-up.
 
-So: any class can provide methods to the AngularJS-side as long as there methods are *public* and annotated with `@ServiceMethod` (in fact: `de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod`). Clicking the button now results in the Java method being called (again with deferred variable changes processed before that).
+So: any class can provide methods to the AngularJS-side as long as their methods are *public* and annotated with `@ServiceMethod` (in fact: `de.akquinet.engineering.vaadin.vaangular.angular.ServiceMethod`). Clicking the button now results in the Java method being called (again with deferred variable changes processed before that).
 
 ### Getting data from vaadin to AngularJS
 
