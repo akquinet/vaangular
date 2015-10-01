@@ -1,7 +1,7 @@
 vaangular
 =========
 
-Provide stellar integration of AngularJS with vaadin
+Provide stellar integration of AngularJS with vaadin. 
 
 ## What is vaangular?
 vaangular combines the power of [vaadin](https://vaadin.com) and Java with the power of [AngularJS](https://angularjs.org) to create awesome UIs. 
@@ -11,6 +11,8 @@ Some reasons why you might want to do that:
 - increase responsiveness (by doing client-side logic)
 - re-use existing AngularJS-based assets
 - have an alternative to custom GWT development
+
+you don't have to do any GWT development. Check out all necessary steps below.
 
 ## How does it work? (examples, please!)
 
