@@ -21,7 +21,7 @@
 
 	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 	<artifactId>vaangular-parent</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -65,7 +65,7 @@
 			<dependency>
 				<groupId>de.akquinet.engineering</groupId>
 				<artifactId>javascriptplus-for-vaadin</artifactId>
-				<version>0.1.0</version>
+				<version>0.1.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
