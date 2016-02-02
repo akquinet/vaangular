@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 		<artifactId>vaangular-parent</artifactId>
-		<version>0.1.2</version>
+		<version>0.1.3-SNAPSHOT</version>
 	</parent> -->
 
 	<modelVersion>4.0.0</modelVersion>
@@ -29,7 +29,7 @@
 	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 	<artifactId>vaangular</artifactId>
 	<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
-	<version>0.1.2</version>
+	<version>0.1.3-SNAPSHOT</version>
 	
 	<properties>
 		<implementation.version>${project.version}</implementation.version>
@@ -70,7 +70,7 @@
 			<artifactId>javascriptplus-for-vaadin</artifactId>
 			<optional>true</optional>
 			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
-			<version>0.1.2</version>
+			<version>0.1.3-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
