@@ -17,16 +17,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+	<!-- at least temporarily move properties / build instructions to sub-projects to make them independent
 	<parent>
 		<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 		<artifactId>vaangular-parent</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
-	</parent>
+		<version>0.1.2-SNAPSHOT</version>
+	</parent> -->
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 	<artifactId>vaangular</artifactId>
+	<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+	<version>0.1.2-SNAPSHOT</version>
 	
 	<properties>
 		<implementation.version>${project.version}</implementation.version>
@@ -34,6 +37,10 @@
 		<implementation.vendor>akquinet engineering GmbH</implementation.vendor>
 		<vaadin.license.title>Apache License Version 2.0</vaadin.license.title>
 		<vaadin.addon>${project.artifactId}-${project.version}.jar</vaadin.addon>
+		<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<vaadin.version>7.6.1</vaadin.version>
+		<gson.version>2.2.4</gson.version>
 	</properties>
 
 	<dependencies>
@@ -41,33 +48,83 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<version>${vaadin.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<version>${vaadin.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<version>${gson.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>de.akquinet.engineering</groupId>
 			<artifactId>javascriptplus-for-vaadin</artifactId>
 			<optional>true</optional>
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<version>0.1.2-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<version>4.10</version>
 		</dependency>
 
 	</dependencies>
 	
 	<build>
 		<plugins>
+
+			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.version}</version>
+				<configuration>
+					<webappDirectory>${project.build.directory}/${project.build.finalName}stage/VAADIN/widgetsets</webappDirectory>
+					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+					<noServer>true</noServer>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resources</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
