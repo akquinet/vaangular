@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 		<artifactId>vaangular-parent</artifactId>
-		<version>0.1.2-SNAPSHOT</version>
+		<version>0.1.2</version>
 	</parent> -->
 
 	<modelVersion>4.0.0</modelVersion>
@@ -29,7 +29,7 @@
 	<groupId>de.akquinet.engineering.vaadin.vaangular</groupId>
 	<artifactId>vaangular-demo</artifactId>
 	<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.2</version>
 	
 	<properties>
 		<spring-boot.version>1.2.1.RELEASE</spring-boot.version>
@@ -49,7 +49,7 @@
 			<groupId>de.akquinet.engineering</groupId>
 			<artifactId>javascriptplus-for-vaadin</artifactId>
 			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
-			<version>0.1.2-SNAPSHOT</version>
+			<version>0.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
