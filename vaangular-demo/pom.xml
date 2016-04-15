@@ -49,7 +49,9 @@
 			<groupId>de.akquinet.engineering</groupId>
 			<artifactId>javascriptplus-for-vaadin</artifactId>
 			<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
-			<version>0.1.3-SNAPSHOT</version>
+			<!-- do use a release per default though
+			<version>0.1.3-SNAPSHOT</version> -->
+			<version>0.1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -181,5 +183,12 @@
 			</testResource>
 		</testResources>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
 
 </project>

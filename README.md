@@ -33,6 +33,14 @@ Here's what the example looks like:
 
 En detail: the current weather (1) is displayed depending on the slider position (2) - this happens without server roundtrips (pure AngularJS). When clicking a 100%-vaadin-like AngularJS-button (3) or a standard-vaadin-button (4), you get a popup window (5) - this happens in vaadin (so there is a seamless integration between those two).
 
+## Running the example from source
+
+You can run the example via 
+
+```
+mvn exec:java -Dexec.mainClass="de.akquinet.engineering.vaadin.vaangular.demo.VaangularApplication"
+```
+
 ## Creating a component
 
 ### Project structure
