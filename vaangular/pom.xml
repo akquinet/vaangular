@@ -39,7 +39,7 @@
 		<vaadin.addon>${project.artifactId}-${project.version}.jar</vaadin.addon>
 		<!-- at least temporarily move properties / build instructions to sub-projects to make them independent -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.6.1</vaadin.version>
+		<vaadin.version>7.7.3</vaadin.version>
 		<gson.version>2.2.4</gson.version>
 	</properties>
 
