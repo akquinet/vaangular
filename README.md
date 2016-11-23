@@ -40,6 +40,7 @@ You can run the example via
 ```
 mvn exec:java -Dexec.mainClass="de.akquinet.engineering.vaadin.vaangular.demo.VaangularApplication"
 ```
+from ```vaangular-demo```
 
 ## Creating a component
 
